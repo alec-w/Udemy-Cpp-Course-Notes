@@ -24,3 +24,10 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 * If a new element is inserted to the vector that takes it above capacity then a new array (typically a factor of 2 larger, implementation dependent) is created and all the elements from the old array are copied across.
 * Using the `resize()` method changes the number of allocated elements (the `clear()` method reduces this to 0) - but has no effect on the `capacity`.
 * The capacity can be increased by using the `reserve()` method - e.g. to immediately allocate memory for X elements to avoid resizing the array if you already know the maximum number of elements you will be adding.
+
+## Lists
+* Lists are a doubly linked list - each element is a node with a data value and pointers to the previous/next element.
+* Navigating lists must be done using an **iterator**.
+* Elements can be added to the beginning/end by using `push_front(value)`/`push_back(value)`.
+* Elements can be added directly after the element currently accessed by an iterator `it` using the method `insert(it, value)`.
+* Elements can be removed by calling `erase(it)` - this removes the element currently referenced by the iterator and moves the iterator to point at the next element.
