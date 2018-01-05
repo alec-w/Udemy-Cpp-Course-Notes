@@ -31,3 +31,18 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 * Elements can be added to the beginning/end by using `push_front(value)`/`push_back(value)`.
 * Elements can be added directly after the element currently accessed by an iterator `it` using the method `insert(it, value)`.
 * Elements can be removed by calling `erase(it)` - this removes the element currently referenced by the iterator and moves the iterator to point at the next element.
+
+## Maps
+* Maps act like a lookup table - you store key -> value pairs.
+* E.g. a map can use strings as keys and ints as values by creating as `map<string, int>`.
+* Values can be added and accessed using standard array syntax (square brackets).
+* Maps can be iterated over in a for loop in a similar way to vectors and strings.
+* An iterator for a map is pointer to an object with properties first and second which are the keys and values respectively.
+* Trying to access a key that does not exist with array type syntax will add it to the map (which may not be the desired behaviour).
+* To check if a key exists in the map use the `find(key)` method - this returns an iterator which points to the element if it exists or points to the end of the map if it does not exist.
+* The object pointed to by the iterator (e.g. iterator of type `map<string, int>::iterator`) is actually a pair (e.g. `pair<string, int>`), which has public members first and second.
+* A pair can be directly inserted into the map using the method `insert(pair<string, int>("Name", 100))`.
+* A pair can be created using the function `make_pair(first, second)` as a shorter syntax.
+* When using custom objects as map values they must have a paramterless constructor.
+* When the map assigns values it is using the objects implementation of the assignment constructor - by default this will be performing a **shallow copy** which may not be desirable and so your object will need the assignment operator overloading.
+* If you insert values using `insert(make_pair(...))` then the copy constructor will be used, this also performs a **shallow copy** by default which may not be desired and so the copy constructor will need to be overwritten.
