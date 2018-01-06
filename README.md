@@ -87,7 +87,7 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 * The comparison function may need to access private members of the object, this can be achieved by using **friend**. Put the declaration of the comparison function in the class declaration and precede it with the keyword `friend`.
 * **Deque** is a double ended queue, it behaves like a vector that can have elements pushed onto the front as well as the end (`push_front` and `push_back` are avaialble methods).
 
-## Operator Overloading - Assignment operator
+## Operator Overloading - Assignment
 * The default implementation of the assignment operator for custom objects performs a **shallow copy** (directly copying the values.
 * The assignment operator is an example of a **binary operator**.
 * The assignment opearator needs to return a const reference to the object it is called on (e.g. so that it can be chained `test3 = test2 = test1` without allowing the object it was just called on to be changed.
@@ -95,3 +95,9 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 * `test3.operator=(test2)` is the same as `test3 = test2`.
 * Using `Test test2 = test1` uses the implicit copy constructor (copy initialization), this is decalred as `Test(const Test &other)`.
 * If you implement an assignment operator, a copy constructor or a destructor then you ought to be sure to implement the other two (rule of 3) - because the reasons for implementing one of them will usually be reasons for needing implementations of the others as well.
+
+## Operator overloading - Left Bit Shift
+* Ths operator (`<<`) is useful for printing objects, e.g. `cout << test1 << endl`.
+* The bit shift operator has left right associativity (as if we do `(cout << test1) << endl`, although this is invalid code) as opposed to the `+` operator which has right left associativity (so `1+2+5` is the same as `1+(2+5)`).
+* So in the line `cout << test1 << endl` both times the left bit shift operator has first argument `ostream` - this is means that it can't be implemented for a custom object as an overloaded operator (because then the implicit first argument would be the custom object), so we need to use friend again.
+* This would be implemented as `friend ostream &operator<<(ostream &out, cosnt Test &test) {out << test.name; return out;}`.
