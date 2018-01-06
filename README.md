@@ -86,3 +86,12 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 * Alternatively a comparison function can be passed to `sort()` as `sort(myVec.begin(), myVec.end(), myComparison)` (the last parameter here is a function pointer - passed by just providing the name of the function).
 * The comparison function may need to access private members of the object, this can be achieved by using **friend**. Put the declaration of the comparison function in the class declaration and precede it with the keyword `friend`.
 * **Deque** is a double ended queue, it behaves like a vector that can have elements pushed onto the front as well as the end (`push_front` and `push_back` are avaialble methods).
+
+## Operator Overloading - Assignment operator
+* The default implementation of the assignment operator for custom objects performs a **shallow copy** (directly copying the values.
+* The assignment operator is an example of a **binary operator**.
+* The assignment opearator needs to return a const reference to the object it is called on (e.g. so that it can be chained `test3 = test2 = test1` without allowing the object it was just called on to be changed.
+* For a class `Test` this would be defined as `const Test &operator=(const Test &other) { .... return *this;}`.
+* `test3.operator=(test2)` is the same as `test3 = test2`.
+* Using `Test test2 = test1` uses the implicit copy constructor (copy initialization), this is decalred as `Test(const Test &other)`.
+* If you implement an assignment operator, a copy constructor or a destructor then you ought to be sure to implement the other two (rule of 3) - because the reasons for implementing one of them will usually be reasons for needing implementations of the others as well.
