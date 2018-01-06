@@ -107,3 +107,7 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 * Since the plus operator doesn't change either of its arguments it can be implemented as a free standing function (provided there a getter methods to provide the member values it needs) that returns a new Complex instance.
 * This would be defined as `Complex operator+(const Complex &c1, const Complex &c2)`.
 * The plus operator can also be overloaded to combine different types, e.g. `Complex operator+(const Complex &c1, double d)`, but this only implements c1+d, not d+c1 - so we need to also implement `Complex operator+(double d, const Complex &c1)`.
+
+## Operator Overloading - Equality Test
+* The equality operator is overloaded as `bool operator==(const myObject &other) const {...}`.
+* Similar the not equal operator is overloaded as `bool operator!=(const myObject &other) const { return !(*this==other); }` - since we are likely going to want the not equal operator to just be the inverse of the equality operator.
