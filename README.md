@@ -96,8 +96,14 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 * Using `Test test2 = test1` uses the implicit copy constructor (copy initialization), this is decalred as `Test(const Test &other)`.
 * If you implement an assignment operator, a copy constructor or a destructor then you ought to be sure to implement the other two (rule of 3) - because the reasons for implementing one of them will usually be reasons for needing implementations of the others as well.
 
-## Operator overloading - Left Bit Shift
+## Operator Overloading - Left Bit Shift
 * Ths operator (`<<`) is useful for printing objects, e.g. `cout << test1 << endl`.
 * The bit shift operator has left right associativity (as if we do `(cout << test1) << endl`, although this is invalid code) as opposed to the `+` operator which has right left associativity (so `1+2+5` is the same as `1+(2+5)`).
 * So in the line `cout << test1 << endl` both times the left bit shift operator has first argument `ostream` - this is means that it can't be implemented for a custom object as an overloaded operator (because then the implicit first argument would be the custom object), so we need to use friend again.
 * This would be implemented as `friend ostream &operator<<(ostream &out, cosnt Test &test) {out << test.name; return out;}`.
+
+## Operator Overloading - Plus
+* *Note: this is using a custom Complex class that is a simple implementation of a complex number class.*
+* Since the plus operator doesn't change either of its arguments it can be implemented as a free standing function (provided there a getter methods to provide the member values it needs) that returns a new Complex instance.
+* This would be defined as `Complex operator+(const Complex &c1, const Complex &c2)`.
+* The plus operator can also be overloaded to combine different types, e.g. `Complex operator+(const Complex &c1, double d)`, but this only implements c1+d, not d+c1 - so we need to also implement `Complex operator+(double d, const Complex &c1)`.
