@@ -67,3 +67,15 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 * Trying to insert the same element twice will just result in the second method call doing nothing.
 * The `find(element)` method can be used to find if an element exists in the set.
 * The `count(element)` method returns 0 or 1 (since the elements are unique - so this is useful to use in if statements to determine if an element exists (as an alternative to `find(element)`).
+
+## Stacks and Queues
+* **Stacks** are a "last in, first out" stucture - like a physical stack of an object.
+* The memory used to store the values of local variables is itself a stack.
+* Declate a stack as `stack<int> myStack` and add elements with the `push()` method (note that when adding objects to a `stack` collection the original object is destroyed and a new one created onto the stack - doing a shallow copy by default).
+* The element on the top of the stack (last added) can be accessed with the `top()` method - either copy it as `Test test1 = testStack.top()` or get a reference to it with `Test &test2 = testStack.top()`, but if this object is then popped from the stack then the object is destoyed and this reference would be invalid.
+* Elements can be taken off the top of the stack with the `pop()` method (this returns void and destroys the object).
+* The `size()` method returns the number of elements in the stack.
+* **Queues** are a "first in, first out" structure - like a physical queue of people.
+* The front of the queue is accessed with `front()` (as opposed to accessing the last element of a stack with `top()`).
+* The `pop()` method of a queue removes the first object added to the queue (referenced by `front()`).
+* The last element added to a queue is accessed with `back()`.
