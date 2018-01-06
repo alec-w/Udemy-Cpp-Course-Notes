@@ -116,3 +116,10 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 * *Note: this is using a custom Complex class that is a simple implementation of a complex number class.*
 * Since the * symbol is often used to denote the complex conjugate we might want to overload it for the Complex class that we created.
 * This could be done as `Complex Complex::operator*() const {...}` - just in the same manner as previously for other operators.
+
+## Template Classes and Functions
+* The compiler needs to know about implementation at compile time (not linking time) - therefore the declaration and the implementation generally should go in the same header file (there are alternatives).
+* Generally use single letters for template types `template<class T>`.
+* Instead of `template<class T>` you can also use `template<typename T>`.
+* Template functions can be overridden, e.g. declare `template<class T>print(T n){...}` and `print(int n)`. Then calling `print<int>(5)` calls the first and `print(5)` calls the latter.
+* Type inference can be used if the argument list provides the type, e.g. we could use `print<>(5)` and type inference will convert it to `print<int>(5)` (if we hadn't overridden the int version of print then we would not need the empty angle brackets). But this only works if we have an argument list that provides the type to c++.
