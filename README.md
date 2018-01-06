@@ -46,3 +46,6 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 * When using custom objects as map values they must have a paramterless constructor.
 * When the map assigns values it is using the objects implementation of the assignment constructor - by default this will be performing a **shallow copy** which may not be desirable and so your object will need the assignment operator overloading.
 * If you insert values using `insert(make_pair(...))` then the copy constructor will be used, this also performs a **shallow copy** by default which may not be desired and so the copy constructor will need to be overwritten.
+* To use custom objects as keys they must have their methods marked as `const` (because the iterator that points to the keys returns them as const values).
+* The keys in a map are sorted, so a custom object used as a key must have the less than operator overloaded as `bool operator<(const myObject &other) const {...}`.
+* The overloaded less than operator is used to determine if two keys are the same - so depending on your object's implementation of the less than operator you may find that the map will treat two keys as the same even if the underlying objects are actually different.
