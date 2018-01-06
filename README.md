@@ -79,3 +79,10 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 * The front of the queue is accessed with `front()` (as opposed to accessing the last element of a stack with `top()`).
 * The `pop()` method of a queue removes the first object added to the queue (referenced by `front()`).
 * The last element added to a queue is accessed with `back()`.
+
+## Sorting vectors, Deque and Friend
+* A vector can be sorted with `sort(myVec.begin(), myVec.end())` (iterators can be supplied for a subsection of the vector to only sort a part of the vector).
+* To sort a vector the elements must have the less than operator defined for them (so custom objects will need to overload it).
+* Alternatively a comparison function can be passed to `sort()` as `sort(myVec.begin(), myVec.end(), myComparison)` (the last parameter here is a function pointer - passed by just providing the name of the function).
+* The comparison function may need to access private members of the object, this can be achieved by using **friend**. Put the declaration of the comparison function in the class declaration and precede it with the keyword `friend`.
+* **Deque** is a double ended queue, it behaves like a vector that can have elements pushed onto the front as well as the end (`push_front` and `push_back` are avaialble methods).
