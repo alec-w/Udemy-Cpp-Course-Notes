@@ -111,3 +111,8 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 ## Operator Overloading - Equality Test
 * The equality operator is overloaded as `bool operator==(const myObject &other) const {...}`.
 * Similar the not equal operator is overloaded as `bool operator!=(const myObject &other) const { return !(*this==other); }` - since we are likely going to want the not equal operator to just be the inverse of the equality operator.
+
+## Operator Overloading - Dereference
+* *Note: this is using a custom Complex class that is a simple implementation of a complex number class.*
+* Since the * symbol is often used to denote the complex conjugate we might want to overload it for the Complex class that we created.
+* This could be done as `Complex Complex::operator*() const {...}` - just in the same manner as previously for other operators.
