@@ -49,3 +49,12 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 * To use custom objects as keys they must have their methods marked as `const` (because the iterator that points to the keys returns them as const values).
 * The keys in a map are sorted, so a custom object used as a key must have the less than operator overloaded as `bool operator<(const myObject &other) const {...}`.
 * The overloaded less than operator is used to determine if two keys are the same - so depending on your object's implementation of the less than operator you may find that the map will treat two keys as the same even if the underlying objects are actually different.
+
+## Multimaps
+* `multimap` allows repeated keys.
+* Multimaps do not have an overloaded array syntax access operator so the `insert` method must be used.
+* Multimaps can be looped through with an iterator like a normal map.
+* Keys are ordered as they are for a map.
+* The `find(key)` method can be used to find a particular key - but this will just point to the first appearance of that key in the map (and keys are no longer unique).
+* To get all the values with a particualr key you would use `pair<multimap<int, string>::iterator, multimap<int, string>::interator> its = myMultimap.equal_range(key)` and then use a for loop of the form `for(multimap<int, string>::iterator it=its.first; it != its.second; it++)`.
+* This can be simplified with use of the **c++11** `auto` type as `auto its = myMultimap.qual_range(30)`.
