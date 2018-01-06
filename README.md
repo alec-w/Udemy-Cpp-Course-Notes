@@ -58,3 +58,12 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 * The `find(key)` method can be used to find a particular key - but this will just point to the first appearance of that key in the map (and keys are no longer unique).
 * To get all the values with a particualr key you would use `pair<multimap<int, string>::iterator, multimap<int, string>::interator> its = myMultimap.equal_range(key)` and then use a for loop of the form `for(multimap<int, string>::iterator it=its.first; it != its.second; it++)`.
 * This can be simplified with use of the **c++11** `auto` type as `auto its = myMultimap.qual_range(30)`.
+
+## Sets
+* A set is an object that only stores unique values, e.g. declared as `set<int> numbers`.
+* Values are inserted using the `insert()` method.
+* Sets order their elements (so custom objects will need the less than operator overloading as they do to use them as map keys).
+* Sets can be iterated in the same manner as vectors/maps/multimaps.
+* Trying to insert the same element twice will just result in the second method call doing nothing.
+* The `find(element)` method can be used to find if an element exists in the set.
+* The `count(element)` method returns 0 or 1 (since the elements are unique - so this is useful to use in if statements to determine if an element exists (as an alternative to `find(element)`).
