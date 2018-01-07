@@ -123,3 +123,15 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 * Instead of `template<class T>` you can also use `template<typename T>`.
 * Template functions can be overridden, e.g. declare `template<class T>print(T n){...}` and `print(int n)`. Then calling `print<int>(5)` calls the first and `print(5)` calls the latter.
 * Type inference can be used if the argument list provides the type, e.g. we could use `print<>(5)` and type inference will convert it to `print<int>(5)` (if we hadn't overridden the int version of print then we would not need the empty angle brackets). But this only works if we have an argument list that provides the type to c++.
+
+## Function Pointers and Related OO Topics
+* A function pointer to a function `void test()` would be declared as `void (*pTest)() = &test` (a pointer to a function that has no arguments and returns void.
+* The address symbol is not needed, because the name of a function is actually a pointer to that function, so we can use `void (*pTest)() = test`.
+* To call the function through the pointer use `(*pTest)()`.
+* The derefernce operator is not needed, so this can be simplified to `pTest()` to call the function pointed to by `pTest`.
+* If the function was `void test(int value)` then a pointer to it would be created as `void (*pTest)(int)`.
+* In the `algorithm` header is the function `count_if(...)`. So if we had a `vector` called `tests`and a function that returned true on some condition on the vector elements called `match(...)`, then we could get the number of matches within our vector by passing the start and end of the vector and a pointer to the matching function (just by its name) as `count_if(tests.begin(), tests.end(), match)`.
+* If we had two classes `Parent` and `Child` (with the latter inheriting from the former) and both implemented a method `void print()` we could create a reference to the parent type that points at the child object `Child c1; Parent &p1 = c1;` and called `p1.print()` we would call the `print()` method from the `Parent` class.
+* To avoid the situation above we must declare the method in the parent class as **virtual** (`virtual void print()`) for C++ to create a table of function pointers that point to the appropriate functions for the right type of object.
+* Note that if a derived class does important cleanup in its destructor then it is a good idea to mark the base class' dstructor as `virtual` to ensure the derived class' destructor is always called.
+* Linked to this is **object slicing** or **upcasting** - where we do something like `Parent p2 = Child()`, and slice off the derived class part and "throw it away" and only keep the base class properties/methods.
