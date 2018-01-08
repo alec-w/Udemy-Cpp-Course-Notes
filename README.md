@@ -142,3 +142,19 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 * A **functor** is a class/struct that overloads the round bracket operator `()`.
 * Functors are useful when you want to pass around a particular block of code - e.g. a base object `Test` and derived object `MatchTest` where the base class overloads the `()` operator as a pure virtual method, then an instance of the derived class can be passed to a function that expects a reference to the base class and used to perform some operation there.
 * Functors can be beneficial over function pointers because they are objects and so can have private variables and other methods and also hold a state if needed.
+
+## C++11 Specifics
+* Will need to use compiler flags of `-std=c++11` or the relevant flags for compiler in use.
+### Decltype, Typid and Name Mangling
+* **Decltype** is a new C++11 keyword, **typeid** is already present in C++98 (but knowledge of both needed for use of **auto** which is new to C++11).
+* To use typeid include the `typeinfo` header (for consistency, although may not be needed) even though it is a keyword.
+* To get the name of a type we can use `typeid(value).name()`, for basic types the name might be `i` for an `int` or `d` for a `double` (compiler dependent).
+* For complex types (e.g. `string`) the name will appear more complicated - due to name mangling.
+* Decltype returns the type of the variable - e.g. `int value1; decltype(value1) value2;` is the same as using `int values1; int value2;`.
+### Auto Keyword
+* In C++98 **auto** is the default storage class specifier for variables (so `auto int value = 7;` is the same as `int value = 7;`).
+* IN C++11 the definition of `auto` has been extended to look at the type of value the variable is being initialised with (so we could just write `auto value = 7;` and it would make `value` of type int because we initialise it with an int.
+* Auto can also be used with **trailing return types** which were added in C++11. This can be used to make one function return the same as another function e.g. `auto test2() -> decltype(test1()) {...}` will make test2 return the same type as test1. Or with a template function we could do `template<class T, class S> auto test(T value1, S value2) -> decltype(value1 + value2) {...}` so that test returns the same variable type as is returned from adding value1 and value2.
+### Range-based Loops
+* A range based for loop for an array like `auto texts = {"one", "two", "three"}` could be done with `for(auto text: texts)` which sets `text` to each of the values in `texts`.
+* The object being looped over must be an array or an object from the standard template library (e.g. `vector` or `string`).
