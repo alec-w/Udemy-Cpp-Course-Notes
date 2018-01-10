@@ -158,3 +158,11 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 ### Range-based Loops
 * A range based for loop for an array like `auto texts = {"one", "two", "three"}` could be done with `for(auto text: texts)` which sets `text` to each of the values in `texts`.
 * The object being looped over must be an array or an object from the standard template library (e.g. `vector` or `string`).
+### Making classes iterable
+* If a class is iterable then it can be looped over uing the same syntax as range-based loops.
+* To make a class iterable it needs to have a nested class `iterator` and methods `begin` and `end`.
+* Suppose we have a `ring` class (acting as a ring buffer) with private members `m_pos`, `m_size` (ints) and `m_values` (pointer to the type of variable being stored in the ring). Then the begin and end methods would return an iterator created as `iterator(m_size, *this)` and `iterator(m_pos, *this)` respectively. With `ring<T>::iterator` having constructor that takes the position it points to and a reference to the ring object, which are in turn private members of the iterator.
+* The iterator also needs to overload the `++` (increment) postfix operator as `iterator &operator++(int) {m_pos++, return *this}`. The increment prefix operator would be overloaded in the same way but simply by not passing an argument.
+* We also overload the dereference operator to return a reference to the current element `T &operator*() { return m_ring.get(m_pos) }`.
+* Finally the not equals (`!=`) operator needs overloading `bool operator!=(const iterator &other) const { return a_pos != other.m_pos; }`.
+* The ring object can be iterated in both C++98 and C++11 style.
