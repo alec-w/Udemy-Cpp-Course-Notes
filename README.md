@@ -166,3 +166,12 @@ Useful notes to refer to made whilst following John Purcell's Advanced C++ cours
 * We also overload the dereference operator to return a reference to the current element `T &operator*() { return m_ring.get(m_pos) }`.
 * Finally the not equals (`!=`) operator needs overloading `bool operator!=(const iterator &other) const { return a_pos != other.m_pos; }`.
 * The ring object can be iterated in both C++98 and C++11 style.
+### Initializer Lists
+* Initializer lists can be used when initializing objects from the standard library (e.g. `vector<string> test {"one", "two", "three"}`) and even custom structs.
+* It can be used with custom classes as `Test(initializer_list<string> texts){...}` and the initializer list can iterated over with a loop like `for(auto value: texts)`.
+* Initiliazer lists can also be passed as arguments to functions.
+### Lambdas
+#### Introducing lambda expressions
+* `auto func = [](){ cout << "Hello" << endl; };` creates func to be a lambda expression (func is a reference to teh anonymous function), which can be called as `func()`.
+* `[](){};` is actually a valid lambda expression.
+* This could be passed to a function with parameters `void test( void (*pFunc)() ) { pFunc(); }` and called as `test(func);`.
